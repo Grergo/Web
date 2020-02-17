@@ -1,3 +1,4 @@
+<%@page import="SQL.MPutils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -61,5 +62,6 @@ body {
 			</ul>
 		</div>
 	</div>
+	<%MPutils.upload_file(request); %>
 </body>
 </html>

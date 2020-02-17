@@ -42,7 +42,7 @@ public class memberUtils {
 		}
 		return personinfo;
 	}
-	public void update_person_info(String gender,String tel,String custname,String loginid) {
+	public  void update_person_info(String gender,String tel,String custname,String loginid) {
 		JDBCUtil jdbcUtil=new JDBCUtil();
 		Connection connection=JDBCUtil.getConnection();
 		PreparedStatement preparedStatement=null;
