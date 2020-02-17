@@ -1,7 +1,7 @@
 package SQL;
 
+import java.io.File;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,12 +9,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 public class MPutils {
+	/**
+	 * 1.查询所有产品
+	 * 2.修改产品
+	 * 3.添加产品
+	 * 4.删除产品
+	 */
+	
 	protected String sql_getProduct="SELECT prodid, prodname, putawaytime, isspecial, isfashion, prodprice, prodimg, prodtype FROM Web_Product;";
-	protected String sql_updateProduct="UPDATE Web_Product SET prodname=?, putawaytime=?, isspecial=?, isfashion=?, prodprice=?, prodtype=? WHERE prodid=?;";
+	protected String sql_updateProduct="UPDATE Web_Product SET prodname=?, isspecial=?, isfashion=?, prodprice=?, prodtype=? WHERE prodid=?;";
 	protected String sql_insertProduct="INSERT INTO Web_Product (prodid, prodname, putawaytime, isspecial, isfashion, prodprice, prodimg, prodtype) VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
 	protected String sql_delProduct="DELETE FROM Web_Product WHERE prodid=?;";
+
 	private ArrayList<Map<String, String>> getProduct() {
 		// 查询所有产品信息,存到list中,返回list,出现异常返回null
 		JDBCUtil jdbcUtil=new JDBCUtil();
@@ -64,5 +74,45 @@ public class MPutils {
 			e.printStackTrace();
 		}
 		
+	}
+	private void Update_Product( String prodname, String isspecial, String isfashion,String prodprice, String prodtype,String prodid) {
+		JDBCUtil jdbcUtil=new JDBCUtil();
+		Connection connection=jdbcUtil.getConnection();
+		PreparedStatement preparedStatement=null;
+		try {
+			preparedStatement=connection.prepareStatement(sql_updateProduct);
+			preparedStatement.setString(1, prodname);
+			preparedStatement.setString(2, isspecial);
+			preparedStatement.setString(3, isfashion);
+			preparedStatement.setDouble(4, Double.valueOf(prodprice));
+			preparedStatement.setString(5, prodtype);
+			preparedStatement.setString(6, prodid);
+			preparedStatement.executeUpdate();
+			jdbcUtil.close(connection, preparedStatement, null);
+		} catch (Exception e) {
+			System.out.println(e.getLocalizedMessage());
+		}
+	}
+	private void del_product(String prodid) {
+		JDBCUtil jdbcUtil=new JDBCUtil();
+		Connection connection=jdbcUtil.getConnection();
+		PreparedStatement preparedStatement=null;
+		try {
+			preparedStatement=connection.prepareStatement(sql_delProduct);
+			preparedStatement.setString(1, prodid);
+			preparedStatement.executeUpdate();
+			jdbcUtil.close(connection, preparedStatement, null);
+		} catch (Exception e) {
+			System.out.println(e.getLocalizedMessage());
+		}
+	}
+	public static String upload_file(HttpServletRequest request) {
+		String path=request.getContextPath()+"/Resource/images/";
+		File dirFile=new File(path);
+		if(!dirFile.exists()) {
+			dirFile.mkdir();
+		}
+		//TODO 图片保存
+		return path;
 	}
 }
