@@ -62,6 +62,12 @@ body {
 			</ul>
 		</div>
 	</div>
-	<%MPutils.upload_file(request); %>
+	<div>
+		<form action="../../PMServlet" method="post"enctype="multipart/form-data">
+本地目录：<input type="file" name="uploadFile">
+<img src="${image_path}" width="200" height="200">
+<input type="submit" value="上传头像"/>
+</form>
+	</div>
 </body>
 </html>

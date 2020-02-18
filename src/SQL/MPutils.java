@@ -25,7 +25,7 @@ public class MPutils {
 	protected String sql_insertProduct="INSERT INTO Web_Product (prodid, prodname, putawaytime, isspecial, isfashion, prodprice, prodimg, prodtype) VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
 	protected String sql_delProduct="DELETE FROM Web_Product WHERE prodid=?;";
 
-	private ArrayList<Map<String, String>> getProduct() {
+	public ArrayList<Map<String, String>> getProduct() {
 		// 查询所有产品信息,存到list中,返回list,出现异常返回null
 		JDBCUtil jdbcUtil=new JDBCUtil();
 		Connection connection=jdbcUtil.getConnection();
@@ -52,7 +52,7 @@ public class MPutils {
 		}
 		return product_ArrayList;
 	}
-	private void insertProduct(String prodname,String prodid,String isspecial,String isfashion,String  prodprice,String prodimg,String prodtype) {
+	public void insertProduct(String prodname,String prodid,String isspecial,String isfashion,String  prodprice,String prodimg,String prodtype) {
 		JDBCUtil jdbcUtil=new JDBCUtil();
 		Connection connection=jdbcUtil.getConnection();
 		java.util.Date date=new java.util.Date();
@@ -70,12 +70,11 @@ public class MPutils {
 			preparedStatement.executeUpdate();
 			jdbcUtil.close(connection, preparedStatement, null);
 		} catch (SQLException e) {
-			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
 		
 	}
-	private void Update_Product( String prodname, String isspecial, String isfashion,String prodprice, String prodtype,String prodid) {
+	public void Update_Product( String prodname, String isspecial, String isfashion,String prodprice, String prodtype,String prodid) {
 		JDBCUtil jdbcUtil=new JDBCUtil();
 		Connection connection=jdbcUtil.getConnection();
 		PreparedStatement preparedStatement=null;
@@ -93,7 +92,7 @@ public class MPutils {
 			System.out.println(e.getLocalizedMessage());
 		}
 	}
-	private void del_product(String prodid) {
+	public void del_product(String prodid) {
 		JDBCUtil jdbcUtil=new JDBCUtil();
 		Connection connection=jdbcUtil.getConnection();
 		PreparedStatement preparedStatement=null;
@@ -105,14 +104,5 @@ public class MPutils {
 		} catch (Exception e) {
 			System.out.println(e.getLocalizedMessage());
 		}
-	}
-	public static String upload_file(HttpServletRequest request) {
-		String path=request.getContextPath()+"/Resource/images/";
-		File dirFile=new File(path);
-		if(!dirFile.exists()) {
-			dirFile.mkdir();
-		}
-		//TODO 图片保存
-		return path;
 	}
 }
