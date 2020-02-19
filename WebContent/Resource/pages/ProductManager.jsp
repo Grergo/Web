@@ -11,6 +11,7 @@
 <script src="../js/jquery-1.11.2.min.js" type="text/javascript"></script>
 <script src="../js/func.js" type="text/javascript"></script>
 <link href="../css/page.css" rel="stylesheet" type="text/css" />
+<link href="../css/reg.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 * {
 	box-sizing: border-box;
@@ -81,72 +82,75 @@ body {
 	<%
 		} else {
 	%>
-	<div class="content3" style="display:flex;flex-wrap:wrap">
+	<div class="content3" style="display: flex; flex-wrap: wrap">
 		<%
 			int i = 1;
 						for (Map<String, String> tem_Map : Product_list) {
-							
 		%>
 		<div class="product">
-			<img src=<%=tem_Map.get("prodimg")%>
-				style="width: 100px; height: 100px">>
+			<img src="getimg.jsp?id=<%=tem_Map.get("prodimg")%>"
+				style="width: 100px; height: 100px">
 			<form action="../../PMServlet" method="Post" class="productform">
-				<input type="text" name="prodname"
-					value=<%=tem_Map.get("prodname")%>> <input type="text"
-					name="prodprice" value=<%=tem_Map.get("prodprice")%>>
+				<label><span>产品名称：</span> <input type="text" name="prodname"
+					value=<%=tem_Map.get("prodname")%>> </label> 
+					<label><span>产品ID：</span> <input type="text" name="prodname"
+					value=<%=tem_Map.get("prodid")%> readonly> </label>
+					<label><span>产品价格：</span>
+					<input type="text" name="prodprice"
+					value=<%=tem_Map.get("prodprice")%>> </label>
 				<%
 					if (tem_Map.get("prodtype").equals("化妆品")) {
 				%>
-				<select name="prodtype">
-					<option value="化妆品" selected="selected">化妆品</option>
-					<option value="手袋&包包">手袋&包包</option>
-					<option value="手表&手饰">手表&手饰</option>
-					<option value="礼物">礼物</option>
-					<option value="电子杂志">电子杂志</option>
-				</select>
+				<label><span>产品类型：</span> <select name="prodtype">
+						<option value="化妆品" selected="selected">化妆品</option>
+						<option value="手袋&包包">手袋&包包</option>
+						<option value="手表&手饰">手表&手饰</option>
+						<option value="礼物">礼物</option>
+						<option value="电子杂志">电子杂志</option>
+				</select> </label>
 				<%
 					} else if (tem_Map.get("prodtype").equals("手袋&包包")) {
 				%>
-				<select name="prodtype">
-					<option value="化妆品">化妆品</option>
-					<option value="手袋&包包" selected="selected">手袋&包包</option>
-					<option value="手表&手饰">手表&手饰</option>
-					<option value="礼物">礼物</option>
-					<option value="电子杂志">电子杂志</option>
-				</select>
+				<label><span>产品类型：</span> <select name="prodtype">
+						<option value="化妆品">化妆品</option>
+						<option value="手袋&包包" selected="selected">手袋&包包</option>
+						<option value="手表&手饰">手表&手饰</option>
+						<option value="礼物">礼物</option>
+						<option value="电子杂志">电子杂志</option>
+				</select> </label>
 				<%
 					} else if (tem_Map.get("prodtype").equals("手表&手饰")) {
 				%>
-				<select name="prodtype">
-					<option value="化妆品">化妆品</option>
-					<option value="手袋&包包">手袋&包包</option>
-					<option value="手表&手饰" selected="selected">手表&手饰</option>
-					<option value="礼物">礼物</option>
-					<option value="电子杂志">电子杂志</option>
-				</select>
+				<label><span>产品类型：</span> <select name="prodtype">
+						<option value="化妆品">化妆品</option>
+						<option value="手袋&包包">手袋&包包</option>
+						<option value="手表&手饰" selected="selected">手表&手饰</option>
+						<option value="礼物">礼物</option>
+						<option value="电子杂志">电子杂志</option>
+				</select> </label>
 				<%
 					} else if (tem_Map.get("prodtype").equals("礼物")) {
 				%>
-				<select name="prodtype">
-					<option value="化妆品">化妆品</option>
-					<option value="手袋&包包">手袋&包包</option>
-					<option value="手表&手饰">手表&手饰</option>
-					<option value="礼物" selected="selected">礼物</option>
-					<option value="电子杂志">电子杂志</option>
-				</select>
+				<label><span>产品类型：</span> <select name="prodtype">
+						<option value="化妆品">化妆品</option>
+						<option value="手袋&包包">手袋&包包</option>
+						<option value="手表&手饰">手表&手饰</option>
+						<option value="礼物" selected="selected">礼物</option>
+						<option value="电子杂志">电子杂志</option>
+				</select> </label>
 				<%
 					} else if (tem_Map.get("prodtype").equals("电子杂志")) {
 				%>
-				<select name="prodtype">
-					<option value="化妆品">化妆品</option>
-					<option value="手袋&包包">手袋&包包</option>
-					<option value="手表&手饰">手表&手饰</option>
-					<option value="礼物">礼物</option>
-					<option value="电子杂志" selected="selected">电子杂志</option>
-				</select>
+				<label><span>产品类型：</span> <select name="prodtype">
+						<option value="化妆品">化妆品</option>
+						<option value="手袋&包包">手袋&包包</option>
+						<option value="手表&手饰">手表&手饰</option>
+						<option value="礼物">礼物</option>
+						<option value="电子杂志" selected="selected">电子杂志</option>
+				</select> </label>
 				<%
 					}
-										if (tem_Map.get("isspecial").equals("是")) {
+									if (tem_Map.get("isspecial").equals("是")) {
 				%>
 				<label> <span>是否特价：</span> <input id="isspecial"
 					type="radio" name="isspecial" required="required" value="是" checked>是
@@ -163,7 +167,7 @@ body {
 				</label>
 				<%
 					}
-										if (tem_Map.get("isfashion").equals("是")) {
+									if (tem_Map.get("isfashion").equals("是")) {
 				%>
 				<label> <span>是否时尚：</span> <input id="isfashion"
 					type="radio" name="isfashion" required="required" value="是" checked>是
@@ -178,6 +182,7 @@ body {
 					<input id="isfashion" type="radio" name="isfashion"
 					required="required" value="不是" checked>不是
 				</label>
+				
 				<%
 					}
 				%>更新产品信息 <label> <span>&nbsp;</span> <input type="button"
@@ -189,13 +194,58 @@ body {
 		</div>
 	</div>
 	<%
-		
-							
-					}
+		}
 				}
-				//TODO 上架产品 以及样式修改 以及上边还有些label 没有添加
-			}
+				
+				break;
+			case "2":
+				MPutils mPutils2 = new MPutils();
+	%>
+	<div class="content2">
+		<form action="../../PMServlet" method="Post" class="productform"
+			enctype="multipart/form-data">
+			
+			<div class="imgbox">
+			<img src="" alt="" id="selectImg"  style="width:200px;height:200px;">
+			</div>
+			
+			<label style="height:48px;margin-top:10px"> <span>选择商品图片：</span>
+			<input type="file" id="uploadImg" onchange="UploadImg(this)" name="prodimg" required >
+			</label>
+			<label><span>商品名称：</span>
+			<input type="text" name="prodname" required placeholder="商品名称">
+			</label>
+			<label><span>商品价格：</span>
+			<input type="text" name="prodprice" required placeholder="商品价格">
+			</label>
+			<label><span>商品类型：</span>
+			<select name="prodtype">
+						<option value="化妆品">化妆品</option>
+						<option value="手袋&包包">手袋&包包</option>
+						<option value="手表&手饰">手表&手饰</option>
+						<option value="礼物">礼物</option>
+						<option value="电子杂志" selected="selected">电子杂志</option>
+				</select>
+			</label>
+			<label><span>是否折扣：</span>
+			<input type="radio" name="isspecial" value="是">是
+			<input type="radio" name="isspecial" value="是">不是
+			</label>
+			<label><span>是否时尚：</span>
+			<input type="radio" name="isfashion" value="是">是
+			<input type="radio" name="isfashion" value="是">不是
+			</label>
+			<label>
+                <span>&nbsp;</span>
+                <input type="submit" class="button" id="submit" value="上架商品" />
+            </label>
+			
+		</form>
+	</div>
+	<%
+		}
 		}
 	%>
+	//TODO 样式修改 以及js函数需要调试
 </body>
 </html>
