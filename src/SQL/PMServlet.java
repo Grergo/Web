@@ -3,6 +3,7 @@ package SQL;
 import java.awt.List;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -13,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.tools.Tool;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -42,7 +44,7 @@ public class PMServlet extends HttpServlet {
 		Map<String, String>product_infoMap=analysis_Post(request);
 		MPutils mPutils=new MPutils();
 		if(product_infoMap.get("flag").equals("add")) {
-			mPutils.insertProduct(product_infoMap.get("prodname"), product_infoMap.get("prodid"), product_infoMap.get("isspecial"), product_infoMap.get("isfashion"), product_infoMap.get("prodprice"), product_infoMap.get("prodimg"),product_infoMap.get("prodtype"));
+			mPutils.insertProduct(product_infoMap.get("prodname"), product_infoMap.get("isspecial"), product_infoMap.get("isfashion"), product_infoMap.get("prodprice"), product_infoMap.get("prodimg"),product_infoMap.get("prodtype"));
 		}else if (product_infoMap.get("flag").equals("change")) {
 			mPutils.Update_Product(product_infoMap.get("prodname"), product_infoMap.get("isspecial"), product_infoMap.get("isfashion"), product_infoMap.get("prodprice"), product_infoMap.get("prodtype"), product_infoMap.get("prodid"));
 		}else if (product_infoMap.get("flag").equals("del")) {
@@ -51,6 +53,11 @@ public class PMServlet extends HttpServlet {
 	}
 	protected Map<String, String> analysis_Post(HttpServletRequest request) {
 		Map<String, String>productinfoMap=new HashMap<String,String>();
+		try {
+			request.setCharacterEncoding("utf-8");
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		} 
 		if(ServletFileUpload.isMultipartContent(request)) {
 			productinfoMap.put("flag", "add");
 			try {
@@ -60,28 +67,43 @@ public class PMServlet extends HttpServlet {
 				sfUpload.setHeaderEncoding("utf-8");
 				java.util.List<FileItem> fileItem_list=sfUpload.parseRequest(request);
 				Iterator<FileItem>fileitems=fileItem_list.iterator();
+				String uploadpath=getServletContext().getRealPath("/") + File.separator +"ProudctImages";
+				File uploadDirFile=new File(uploadpath);
+				if(!uploadDirFile.exists()) {
+					uploadDirFile.mkdir();
+				}
 				while(fileitems.hasNext()) {
 					FileItem fileItem=fileitems.next();
 					if(fileItem.isFormField()) {
-						String name=fileItem.getName();
+						String name=fileItem.getFieldName();
+						
 						String value=fileItem.getString("utf-8");
 						productinfoMap.put(name, value);
-						System.out.println(name+"="+value);
 					}else {
 						String filename=fileItem.getName();
 						String uuid=UUID.randomUUID().toString().replaceAll("-", "");
 						String suffixName=filename.substring(filename.lastIndexOf('.'));
 						filename=uuid+suffixName;
-						File file=new File(this.getServletContext().getRealPath("/WebContent/Resource/images/ProductImages/")+filename);
+						File file=new File(uploadpath+File.separator+filename);
+						String filepath=uploadpath+File.separator+filename;
+						filepath=filepath.replaceAll("\\\\", "/");
 						fileItem.write(file);
 						fileItem.delete();
-						productinfoMap.put("prodimg", "../images/ProductImages/"+filename);
+						productinfoMap.put("prodimg", filepath);
 					}
 				}
 			} catch (Exception e) {
 				System.out.println(e.getLocalizedMessage());
 			}
 		}else {
+			if(request.getParameter("flag").equals("add")) {
+				productinfoMap.put("flag",request.getParameter("flag"));
+				productinfoMap.put("prodname", request.getParameter("prodname"));
+				productinfoMap.put("isspecial", request.getParameter("isspecial"));
+				productinfoMap.put("isfashion", request.getParameter("isfashion"));
+				productinfoMap.put("prodprice", request.getParameter("prodprice"));
+				productinfoMap.put("prodtype", request.getParameter("prodtype"));
+			}else {
 			productinfoMap.put("flag",request.getParameter("flag"));
 			productinfoMap.put("prodname", request.getParameter("prodname"));
 			productinfoMap.put("isspecial", request.getParameter("isspecial"));
@@ -89,6 +111,8 @@ public class PMServlet extends HttpServlet {
 			productinfoMap.put("prodprice", request.getParameter("prodprice"));
 			productinfoMap.put("prodtype", request.getParameter("prodtype"));
 			productinfoMap.put("prodid", request.getParameter("prodid"));
+			
+			}
 		}
 		return productinfoMap;
 	}

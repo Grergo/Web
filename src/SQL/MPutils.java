@@ -1,6 +1,10 @@
 package SQL;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -42,7 +47,7 @@ public class MPutils {
 				temp_mapMap.put("isspecial", resultSet.getString("isspecial"));
 				temp_mapMap.put("isfashion", resultSet.getString("isfashion"));
 				temp_mapMap.put("prodprice", Double.toString(resultSet.getDouble("prodprice")));
-				temp_mapMap.put("prodimg", resultSet.getString("prodimg"));
+				temp_mapMap.put("prodimg", resultSet.getString("prodid"));
 				temp_mapMap.put("prodtype", resultSet.getString("prodtype"));
 				product_ArrayList.add(temp_mapMap);
 			}
@@ -52,24 +57,34 @@ public class MPutils {
 		}
 		return product_ArrayList;
 	}
-	public void insertProduct(String prodname,String prodid,String isspecial,String isfashion,String  prodprice,String prodimg,String prodtype) {
+	public void insertProduct(String prodname,String isspecial,String isfashion,String  prodprice,String prodimg,String prodtype) {
 		JDBCUtil jdbcUtil=new JDBCUtil();
 		Connection connection=jdbcUtil.getConnection();
 		java.util.Date date=new java.util.Date();
 		java.sql.Date sql_date= new java.sql.Date(date.getTime());
+		String prodid=UUID.randomUUID().toString().replaceAll("-", "");
+		InputStream imgStream = null;
+		try {
+			imgStream = new FileInputStream(prodimg);
+		} catch (FileNotFoundException e1) {
+			System.out.println(e1.getLocalizedMessage());
+		}
 		try {
 			PreparedStatement preparedStatement=connection.prepareStatement(sql_insertProduct);
-			preparedStatement.setString(1, prodname);
-			preparedStatement.setString(2, prodid);
+			preparedStatement.setString(1, prodid);
+			preparedStatement.setString(2, prodname);
 			preparedStatement.setDate(3, sql_date);
 			preparedStatement.setString(4, isspecial);
 			preparedStatement.setString(5, isfashion);
 			preparedStatement.setDouble(6, Double.valueOf(prodprice));
-			preparedStatement.setString(7, prodimg);
+			preparedStatement.setBlob(7, imgStream);
 			preparedStatement.setString(8, prodtype);
 			preparedStatement.executeUpdate();
+			imgStream.close();
+			File file=new File(prodimg);
+			file.delete();
 			jdbcUtil.close(connection, preparedStatement, null);
-		} catch (SQLException e) {
+		} catch (SQLException | IOException e) {
 			e.printStackTrace();
 		}
 		

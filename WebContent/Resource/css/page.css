@@ -442,3 +442,33 @@ color: #576574;
 .message{
 	width:80%;
 }
+
+.imgbox{
+	width:202px;
+	height:202px;
+	border:1px solid black;
+	position: relative;
+	margin-left:auto;
+    margin-right:auto;
+}
+
+select{
+appearance:none;
+-webkit-appearance:none;
+-moz-appearance: none;
+ text-indent: 0.01px;
+ text-overflow: '';
+ width: 70%;
+ height: 35px;
+ line-height: 25px;
+}
+.content2 input[type="file"]{
+	background: rgb(92, 133, 209);
+ border: none;
+color: #FFF;
+ box-shadow: 1px 1px 5px #B6B6B6;
+ border-radius: 3px;
+ text-shadow: 1px 1px 1px rgb(63, 69, 158);
+ cursor: pointer;
+}
+
