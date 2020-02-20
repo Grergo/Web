@@ -7,15 +7,15 @@ function validateForm() {
 		return false;
 	}
 }
-function updateSubmit(){
-	var myform=$('.productform');
+function updateSubmit(button){
+	var myform=$(button).parent().parent();
 	var tmpItem=$("<input type='hidden' name='flag' />");
 	tmpItem.attr('value','change');
 	myform.append(tmpItem);
 	myform.submit();
 }
-function delSubmit(){
-	var myform=$('.productform');
+function delSubmit(button){
+	var myform=$(button).parent().parent();
 	var tmpItem=$("<input type='hidden' name='flag' />");
 	tmpItem.attr('value','del');
 	myform.append(tmpItem);

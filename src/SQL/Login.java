@@ -44,7 +44,7 @@ public class Login extends HttpServlet {
 				setLoginCookie(response, idString);
 				setLoginSession(request, idString);
 				if(userString.equals("weiwang730@gmail.com")) {
-					response.sendRedirect(request.getContextPath()+"/Resource/pages/ProductManager.jsp");
+					response.sendRedirect(request.getContextPath()+"/Resource/pages/ProductManager.jsp?id=1");
 				}else {
 					response.sendRedirect(request.getContextPath()+"/Resource/pages/memberCenter.jsp?id=1");
 				}
