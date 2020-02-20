@@ -5,40 +5,42 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>商品管理</title>
-<script src="../js/jquery-1.11.2.min.js" type="text/javascript"></script>
-<script src="../js/func.js" type="text/javascript"></script>
-<link href="../css/page.css" rel="stylesheet" type="text/css" />
-<link href="../css/reg.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-* {
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-}
+	<meta charset="UTF-8">
+	<title>商品管理</title>
+	<script src="../js/jquery-1.11.2.min.js" type="text/javascript"></script>
+	<script src="../js/func.js" type="text/javascript"></script>
+	<link href="../css/page.css" rel="stylesheet" type="text/css" />
+	<link href="../css/reg.css" rel="stylesheet" type="text/css" />
+	<style type="text/css">
+		* {
+			box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+		}
 
-body {
-	background: #f0f0f0;
-}
+		body {
+			background: #f0f0f0;
+		}
 
-.content {
-	width: 260px;
-	position: relative;
-	left: 10%;
-	top: 60px
-}
+		.content {
+			width: 260px;
+			position: relative;
+			left: 10%;
+			top: 60px
+		}
 
-#demo-list a {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	-o-text-overflow: ellipsis;
-	white-space: nowrap;
-	width: 100%;
-}
-</style>
+		#demo-list a {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			-o-text-overflow: ellipsis;
+			white-space: nowrap;
+			width: 100%;
+		}
+	</style>
 </head>
+
 <body>
 	<%
 		Cookie cookie = null;
@@ -59,11 +61,16 @@ body {
 	%>
 	<%@include file="nav.jsp"%>
 	<div class="content">
-		<div id="jquery-accordion-menu" class="jquery-accordion-menu blue"
-			style="box-shadow: 5px 7px 7px #3595b8;">
+		<div id="jquery-accordion-menu" class="jquery-accordion-menu blue" style="box-shadow: 5px 7px 7px #3595b8;">
 			<ul id="demo-list">
-				<li><a href="ProductManager.jsp?id=1"><h3>修改已上架商品</h3></a></li>
-				<li><a href="ProductManager.jsp?id=2"><h3>上架商品</h3> </a></li>
+				<li><a href="ProductManager.jsp?id=1">
+						<h3>修改已上架商品</h3>
+					</a>
+				</li>
+				<li><a href="ProductManager.jsp?id=2">
+						<h3>上架商品</h3>
+					</a>
+				</li>
 			</ul>
 		</div>
 	</div>
@@ -88,16 +95,16 @@ body {
 						for (Map<String, String> tem_Map : Product_list) {
 		%>
 		<div class="product">
-			<img src="getimg.jsp?id=<%=tem_Map.get("prodimg")%>"
-				style="width: 100px; height: 100px">
+			<div class="imgbox">
+				<img src="getimg.jsp?id=<%=tem_Map.get("prodimg")%>" style="width: 200px; height: 200px">
+			</div>
 			<form action="../../PMServlet" method="Post" class="productform">
-				<label><span>产品名称：</span> <input type="text" name="prodname"
-					value=<%=tem_Map.get("prodname")%>> </label> 
-					<label><span>产品ID：</span> <input type="text" name="prodname"
-					value=<%=tem_Map.get("prodid")%> readonly> </label>
-					<label><span>产品价格：</span>
-					<input type="text" name="prodprice"
-					value=<%=tem_Map.get("prodprice")%>> </label>
+				<label style="margin-top: 10px;"><span>产品名称：</span> <input type="text" name="prodname"
+						value=<%=tem_Map.get("prodname")%>>
+				</label> <label><span>产品ID：</span> <input type="text" name="prodid" value=<%=tem_Map.get("prodid")%>
+						readonly>
+				</label> <label><span>产品价格：</span> <input type="text" name="prodprice"
+						value=<%=tem_Map.get("prodprice")%>> </label>
 				<%
 					if (tem_Map.get("prodtype").equals("化妆品")) {
 				%>
@@ -107,7 +114,7 @@ body {
 						<option value="手表&手饰">手表&手饰</option>
 						<option value="礼物">礼物</option>
 						<option value="电子杂志">电子杂志</option>
-				</select> </label>
+					</select> </label>
 				<%
 					} else if (tem_Map.get("prodtype").equals("手袋&包包")) {
 				%>
@@ -117,7 +124,7 @@ body {
 						<option value="手表&手饰">手表&手饰</option>
 						<option value="礼物">礼物</option>
 						<option value="电子杂志">电子杂志</option>
-				</select> </label>
+					</select> </label>
 				<%
 					} else if (tem_Map.get("prodtype").equals("手表&手饰")) {
 				%>
@@ -127,7 +134,7 @@ body {
 						<option value="手表&手饰" selected="selected">手表&手饰</option>
 						<option value="礼物">礼物</option>
 						<option value="电子杂志">电子杂志</option>
-				</select> </label>
+					</select> </label>
 				<%
 					} else if (tem_Map.get("prodtype").equals("礼物")) {
 				%>
@@ -137,7 +144,7 @@ body {
 						<option value="手表&手饰">手表&手饰</option>
 						<option value="礼物" selected="selected">礼物</option>
 						<option value="电子杂志">电子杂志</option>
-				</select> </label>
+					</select> </label>
 				<%
 					} else if (tem_Map.get("prodtype").equals("电子杂志")) {
 				%>
@@ -147,105 +154,97 @@ body {
 						<option value="手表&手饰">手表&手饰</option>
 						<option value="礼物">礼物</option>
 						<option value="电子杂志" selected="selected">电子杂志</option>
-				</select> </label>
+					</select> </label>
 				<%
 					}
 									if (tem_Map.get("isspecial").equals("是")) {
 				%>
-				<label> <span>是否特价：</span> <input id="isspecial"
-					type="radio" name="isspecial" required="required" value="是" checked>是
-					<input id="isspecial" type="radio" name="isspecial"
-					required="required" value="不是">不是
+				<label> <span>是否特价：</span> <input id="isspecial" type="radio" name="isspecial" required="required"
+						value="是" checked>
+					<font style="color: #f5f6fa">是</font> <input id="isspecial" type="radio" name="isspecial"
+						required="required" value="不是">
+					<font style="color: #f5f6fa">不是</font>
 				</label>
 				<%
 					} else if (tem_Map.get("isspecial").equals("不是")) {
 				%>
-				<label> <span>是否特价：</span> <input id="isspecial"
-					type="radio" name="isspecial" required="required" value="是">是
-					<input id="isspecial" type="radio" name="isspecial"
-					required="required" value="不是" checked>不是
+				<label> <span>是否特价：</span> <input id="isspecial" type="radio" name="isspecial" required="required"
+						value="是">
+					<font style="color: #f5f6fa">是</font> <input id="isspecial" type="radio" name="isspecial"
+						required="required" value="不是" checked>
+					<font style="color: #f5f6fa">不是</font>
 				</label>
 				<%
 					}
 									if (tem_Map.get("isfashion").equals("是")) {
 				%>
-				<label> <span>是否时尚：</span> <input id="isfashion"
-					type="radio" name="isfashion" required="required" value="是" checked>是
-					<input id="isfashion" type="radio" name="isfashion"
-					required="required" value="不是">不是
+				<label> <span>是否时尚：</span> <input id="isfashion" type="radio" name="isfashion" required="required"
+						value="是" checked>
+					<font style="color:#f5f6fa">是</font>
+					<input id="isfashion" type="radio" name="isfashion" required="required" value="不是">
+					<font style="color:#f5f6fa">不是</font>
 				</label>
 				<%
 					} else if (tem_Map.get("isfashion").equals("不是")) {
 				%>
-				<label> <span>是否时尚：</span> <input id="isfashion"
-					type="radio" name="isfashion" required="required" value="是">是
-					<input id="isfashion" type="radio" name="isfashion"
-					required="required" value="不是" checked>不是
+				<label> <span>是否时尚：</span> <input id="isfashion" type="radio" name="isfashion" required="required"
+						value="是">
+					<font style="color:#f5f6fa">是</font>
+					<input id="isfashion" type="radio" name="isfashion" required="required" value="不是" checked>
+					<font style="color:#f5f6fa">不是</font>
 				</label>
-				
+
 				<%
 					}
-				%>更新产品信息 <label> <span>&nbsp;</span> <input type="button"
-					class="button" id="submit" value="更新产品信息" onclick="updateSubmit()" />
-				</label> <label> <span>&nbsp;</span> <input type="button"
-					class="button" id="del" value="下架产品" onclick="delSubmit()" />
+				%>
+				<label> <input type="button" class="button" id="change" value="更新产品信息" onclick="updateSubmit(this)" />
+					<input type="button" class="button" id="del" value="下架产品" onclick="delSubmit(this)" />
 				</label>
+
 			</form>
 		</div>
+
+		<%
+			}
+					}
+		%>
 	</div>
 	<%
-		}
-				}
-				
-				break;
+		break;
 			case "2":
 				MPutils mPutils2 = new MPutils();
 	%>
 	<div class="content2">
-		<form action="../../PMServlet" method="Post" class="productform"
-			enctype="multipart/form-data">
-			
+		<form action="../../PMServlet" method="Post" class="productform" enctype="multipart/form-data">
+
 			<div class="imgbox">
-			<img src="" alt="" id="selectImg"  style="width:200px;height:200px;">
+				<img src="" alt="" id="selectImg" style="width: 200px; height: 200px;">
 			</div>
-			
-			<label style="height:48px;margin-top:10px"> <span>选择商品图片：</span>
-			<input type="file" id="uploadImg" onchange="UploadImg(this)" name="prodimg" required >
-			</label>
-			<label><span>商品名称：</span>
-			<input type="text" name="prodname" required placeholder="商品名称">
-			</label>
+
+			<label style="height: 48px; margin-top: 10px"> <span>选择商品图片：</span>
+				<input type="file" id="uploadImg" onchange="UploadImg(this)" name="prodimg" required>
+			</label> <label><span>商品名称：</span> <input type="text" name="prodname" required placeholder="商品名称"> </label>
 			<label><span>商品价格：</span>
-			<input type="text" name="prodprice" required placeholder="商品价格">
+				<input type="text" name="prodprice" required placeholder="商品价格">
+			</label> <label><span>商品类型：</span> <select name="prodtype">
+					<option value="化妆品">化妆品</option>
+					<option value="手袋&包包">手袋&包包</option>
+					<option value="手表&手饰">手表&手饰</option>
+					<option value="礼物">礼物</option>
+					<option value="电子杂志" selected="selected">电子杂志</option>
+				</select> </label> <label><span>是否折扣：</span> <input type="radio" name="isspecial" value="是">是 <input
+					type="radio" name="isspecial" value="是">不是 </label> <label><span>是否时尚：</span>
+				<input type="radio" name="isfashion" value="是">是 <input type="radio" name="isfashion" value="是">不是
+			</label> <label>
+				<span>&nbsp;</span> <input type="submit" class="button" id="submit" value="上架商品" />
 			</label>
-			<label><span>商品类型：</span>
-			<select name="prodtype">
-						<option value="化妆品">化妆品</option>
-						<option value="手袋&包包">手袋&包包</option>
-						<option value="手表&手饰">手表&手饰</option>
-						<option value="礼物">礼物</option>
-						<option value="电子杂志" selected="selected">电子杂志</option>
-				</select>
-			</label>
-			<label><span>是否折扣：</span>
-			<input type="radio" name="isspecial" value="是">是
-			<input type="radio" name="isspecial" value="是">不是
-			</label>
-			<label><span>是否时尚：</span>
-			<input type="radio" name="isfashion" value="是">是
-			<input type="radio" name="isfashion" value="是">不是
-			</label>
-			<label>
-                <span>&nbsp;</span>
-                <input type="submit" class="button" id="submit" value="上架商品" />
-            </label>
-			
+
 		</form>
 	</div>
 	<%
 		}
 		}
 	%>
-	//TODO 样式修改 以及js函数需要调试
 </body>
+
 </html>
