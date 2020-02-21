@@ -1,5 +1,9 @@
+<%@page import="SQL.ShowUtils"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="SQL.memberUtils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +12,121 @@
 <link rel="stylesheet" href="../css/ad.css">
 </head>
 <body>
+	<div class="Main">
+	<div>
+		<!-- 登录注册栏 -->
+	</div>
 	<%@include file="nav.jsp"%>
 	<div class="topad">
-	<%@include file="topad.jsp"%>
-	<div>
-	<!-- TODO: 公告栏需要制作 -->
+		<%@include file="topad.jsp"%>
+		<div style="display: flex; flex-wrap: wrap; width: 950px;">
+			<div class="poptip">
+				<div class="top_title">
+					<h3>系统公告</h3>
+					<span><a href='memberCenter.jsp?id=5'>more >></a></span>
+					<hr>
+				</div>
+				<%
+					memberUtils memberUtils = new memberUtils();
+					ArrayList<Map<String, String>> notice_List = memberUtils.Select_notice();
+					for (Map<String, String> tem : notice_List) {
+				%>
+				<div class="content">
+					<p>
+						<span class="flag">公告</span> <span class="text"><a
+							href="memberCenter.jsp?id=5"><%=tem.get("message")%></a></span>
+					</p>
+				</div>
+				<%
+					}
+				%>
+			</div>
+			<div class="products">
+				<h3 id="product_title">新品上市</h3>
+				<hr>
+				<div class="product_news">
+				<% 
+					ShowUtils showUtils=new ShowUtils();
+					ArrayList<Map<String,String>> news=showUtils.Select_news("化妆品");
+					if(news.size()!=0){
+					for(Map<String,String>tem:news){
+						%>
+					
+						<div class="product">
+						<div id="prodimgbox">
+							<a href="proddetail.jsp?id=<%=tem.get("prodid")%>"><img src="getimg.jsp?id=<%=tem.get("prodid")%>"style="width:100px;height:100px"></a>
+						</div>
+						<span id="prodname"><a href="proddetail.jsp?id=<%=tem.get("prodid")%>"><%=tem.get("prodname")%></a></span> 
+						<span id="prodprice"><%=tem.get("prodprice")%></span>
+					</div>
+				
+						<%
+					}
+					} else{
+						%>
+							<span id="notice">暂无新品上市</span>
+						<%
+					}
+					
+				%>
+				</div>
+				<h3 id="product_title">特价商品</h3>
+				<hr>
+				<div class="product_special">
+					<% 
+					ArrayList<Map<String,String>>special=showUtils.Select_assigned_product("化妆品", "是");
+					if(special.size()!=0){
+					for(Map<String,String>tem:special){
+						%>
+
+						<div class="product">
+						<div id="prodimgbox">
+							<a href="proddetail.jsp?id=<%=tem.get("prodid")%>"><img src="getimg.jsp?id=<%=tem.get("prodid")%>"style="width:100px;height:100px"></a>
+						</div>
+						<span id="prodname"><a href="proddetail.jsp?id=<%=tem.get("prodid")%>"><%=tem.get("prodname")%></a></span> 
+						<span id="prodprice"><%=tem.get("prodprice")%></span>
+					</div>
+
+						<%
+					}
+					} else{
+						%>
+							<span id="notice">暂无特价商品上市</span>
+						<%
+					}
+					
+				%>
+				</div>
+				<h3 id="product_title">全部商品</h3>
+				<hr>
+				<div class="product_all">
+					<% 
+					ArrayList<Map<String,String>>allprod=showUtils.Select_assigned_product("化妆品", null);
+					if(allprod.size()!=0){
+					for(Map<String,String>tem:allprod){
+						%>
+
+						<div class="product">
+						<div id="prodimgbox">
+							<a href="proddetail.jsp?id=<%=tem.get("prodid")%>"><img src="getimg.jsp?id=<%=tem.get("prodid")%>"style="width:100px;height:100px"></a>
+						</div>
+						<span id="prodname"><a href="proddetail.jsp?id=<%=tem.get("prodid")%>"><%=tem.get("prodname")%></a></span> 
+						<span id="prodprice"><%=tem.get("prodprice")%></span>
+					</div>
+				
+						<%
+					}
+					} else{
+						%>
+							<span id="notice">暂无商品上市</span>
+						<%
+					}
+					
+				%>
+			</div>
+			</div>
+		</div>
+	</div>
+	</div>
 </body>
 </html>
