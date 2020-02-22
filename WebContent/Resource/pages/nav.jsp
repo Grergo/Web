@@ -10,14 +10,16 @@
 	body{
   background: #ebebeb;
 }
-	.nav{
-  width:960px;
-  height: 50px;
-  font:bold 0/50px Arial;
-  text-align:center;
-  margin:60px auto 0;
-		border-radius: 8px;
-	}
+.nav {
+    width: 960px;
+    height: 50px;
+    font: bold 0/50px Arial;
+    text-align: center;
+    border-radius: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+}
 	.nav a{display: inline-block;
 		-webkit-transition: all 0.2s ease-in;
 		-moz-transition: all 0.2s ease-in;
@@ -84,13 +86,13 @@
 </head>
 <body>
 <ul class="nav blue">
-      <li><a href="">化妆品</a></li>
-      <li><a href="">手袋&包包</a></li>
-      <li><a href="">手表&手饰</a></li>
-      <li><a href="">时尚</a></li>
-      <li><a href="">礼物</a></li>
-      <li><a href="">电子杂志</a></li>
-      <li><a href="">最新活动</a></li>
+      <li><a href="cosmetics.jsp">化妆品</a></li>
+      <li><a href="Bags.jsp">手袋&包包</a></li>
+      <li><a href="jewelry.jsp">手表&手饰</a></li>
+      <li><a href="fashion.jsp">时尚</a></li>
+      <li><a href="gift.jsp">礼物</a></li>
+      <li><a href="e-magazine.jsp">电子杂志</a></li>
+      <li><a href="#">最新活动</a></li>
 </ul>
 </body>
 </html>

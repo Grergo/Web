@@ -29,7 +29,7 @@ public class MPutils {
 	protected String sql_updateProduct="UPDATE Web_Product SET prodname=?, isspecial=?, isfashion=?, prodprice=?, prodtype=? WHERE prodid=?;";
 	protected String sql_insertProduct="INSERT INTO Web_Product (prodid, prodname, putawaytime, isspecial, isfashion, prodprice, prodimg, prodtype) VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
 	protected String sql_delProduct="DELETE FROM Web_Product WHERE prodid=?;";
-
+	protected String sql_update_notice="INSERT INTO Web_Notic (message) values(?);";
 	public ArrayList<Map<String, String>> getProduct() {
 		// 查询所有产品信息,存到list中,返回list,出现异常返回null
 		JDBCUtil jdbcUtil=new JDBCUtil();
@@ -114,6 +114,19 @@ public class MPutils {
 		try {
 			preparedStatement=connection.prepareStatement(sql_delProduct);
 			preparedStatement.setString(1, prodid);
+			preparedStatement.executeUpdate();
+			jdbcUtil.close(connection, preparedStatement, null);
+		} catch (Exception e) {
+			System.out.println(e.getLocalizedMessage());
+		}
+	}
+	public void update_notice(String notice) {
+		JDBCUtil jdbcUtil=new JDBCUtil();
+		Connection connection=jdbcUtil.getConnection();
+		PreparedStatement preparedStatement=null;
+		try {
+			preparedStatement=connection.prepareStatement(sql_update_notice);
+			preparedStatement.setString(1, notice);
 			preparedStatement.executeUpdate();
 			jdbcUtil.close(connection, preparedStatement, null);
 		} catch (Exception e) {

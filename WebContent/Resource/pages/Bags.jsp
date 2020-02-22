@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>化妆品专区</title>
+<title>手袋&包包</title>
 <link rel="stylesheet" href="../css/ad.css">
 <link rel="stylesheet" href="../css/footer.css">
 </head>
@@ -49,7 +49,7 @@
 				<div class="product_news">
 				<% 
 					ShowUtils showUtils=new ShowUtils();
-					ArrayList<Map<String,String>> news=showUtils.Select_news("化妆品");
+					ArrayList<Map<String,String>> news=showUtils.Select_news("手袋&包包");
 					if(news.size()!=0){
 					for(Map<String,String>tem:news){
 						%>
@@ -76,7 +76,7 @@
 				<hr>
 				<div class="product_special">
 					<% 
-					ArrayList<Map<String,String>>special=showUtils.Select_assigned_product("化妆品", "是");
+					ArrayList<Map<String,String>>special=showUtils.Select_assigned_product("手袋&包包", "是");
 					if(special.size()!=0){
 					for(Map<String,String>tem:special){
 						%>
@@ -103,7 +103,7 @@
 				<hr>
 				<div class="product_all">
 					<% 
-					ArrayList<Map<String,String>>allprod=showUtils.Select_assigned_product("化妆品", null);
+					ArrayList<Map<String,String>>allprod=showUtils.Select_assigned_product("手袋&包包", null);
 					if(allprod.size()!=0){
 					for(Map<String,String>tem:allprod){
 						%>

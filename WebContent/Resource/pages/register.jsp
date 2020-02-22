@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>注册会员</title>
 <link rel="stylesheet" href="../css/reg.css">
+<link rel="stylesheet" href="../css/footer.css">
 <script src="../js/func.js" type="text/javascript"></script>
 </head>
 <body>
@@ -57,5 +58,6 @@
 		%>
         </form>
     </div>
+    <%@include file="footer2.jsp" %>
 </body>
 </html>

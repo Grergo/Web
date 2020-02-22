@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>化妆品专区</title>
+<title>电子杂志</title>
 <link rel="stylesheet" href="../css/ad.css">
 <link rel="stylesheet" href="../css/footer.css">
 </head>
@@ -16,7 +16,7 @@
 	<div class="Main">
 	<img src="../images/logo.png" class="logo">
 	<div class="top_bar">
-		<a href="Login.jsp">登录</a>  |  <a href="register.jsp">注册</a>  |  <a href="memberCenter.jsp?id=1">会员中心</a>  |  <a href="shopping_cart.jsp">购物车</a>
+		<a href="Login.jsp">登录</a>  |  <a href="register.jsp">注册</a>  |  <a href="memberCenter.jsp">会员中心</a>  |  <a href="shopping_cart.jsp">购物车</a>
 	</div>
 	<%@include file="nav.jsp"%>
 	<div class="topad">
@@ -49,7 +49,7 @@
 				<div class="product_news">
 				<% 
 					ShowUtils showUtils=new ShowUtils();
-					ArrayList<Map<String,String>> news=showUtils.Select_news("化妆品");
+					ArrayList<Map<String,String>> news=showUtils.Select_news("电子杂志");
 					if(news.size()!=0){
 					for(Map<String,String>tem:news){
 						%>
@@ -76,7 +76,7 @@
 				<hr>
 				<div class="product_special">
 					<% 
-					ArrayList<Map<String,String>>special=showUtils.Select_assigned_product("化妆品", "是");
+					ArrayList<Map<String,String>>special=showUtils.Select_assigned_product("电子杂志", "是");
 					if(special.size()!=0){
 					for(Map<String,String>tem:special){
 						%>
@@ -103,7 +103,7 @@
 				<hr>
 				<div class="product_all">
 					<% 
-					ArrayList<Map<String,String>>allprod=showUtils.Select_assigned_product("化妆品", null);
+					ArrayList<Map<String,String>>allprod=showUtils.Select_assigned_product("电子杂志", null);
 					if(allprod.size()!=0){
 					for(Map<String,String>tem:allprod){
 						%>

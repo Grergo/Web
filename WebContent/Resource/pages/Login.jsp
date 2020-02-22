@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>用户登录</title>
 <link rel="stylesheet" href="../css/reg.css">
+<link rel="stylesheet" href="../css/footer.css">
 </head>
 <body>
 	<%@include file="nav.jsp"%>
@@ -37,6 +38,6 @@
 		%>
 	 </form>
 	</div>
-	
+	<%@include file="footer2.jsp" %>
 </body>
 </html>

@@ -13,6 +13,7 @@
 	<script src="../js/func.js" type="text/javascript"></script>
 	<link href="../css/page.css" rel="stylesheet" type="text/css" />
 	<link href="../css/reg.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="../css/footer.css">
 	<style type="text/css">
 		* {
 			box-sizing: border-box;
@@ -69,6 +70,10 @@
 				</li>
 				<li><a href="ProductManager.jsp?id=2">
 						<h3>上架商品</h3>
+					</a>
+				</li>
+				<li><a href="ProductManager.jsp?id=3">
+						<h3>管理公告</h3>
 					</a>
 				</li>
 			</ul>
@@ -242,6 +247,18 @@
 		</form>
 	</div>
 	<%
+	break;
+			case "3":
+				%>
+					<div class='content2'>
+		<form action="../../PMServlet" method="post">
+			 <label> <span>公告内容:</span> <textarea name="notice"></textarea>
+			</label> <label> <span>&nbsp;</span> <input type="submit"
+				class="button" id="submit" value="发布公告" />
+			</label>
+		</form>
+	</div>
+				<%
 		}
 		}
 	%>

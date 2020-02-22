@@ -55,6 +55,9 @@ public class PMServlet extends HttpServlet {
 		} else if (product_infoMap.get("flag").equals("del")) {
 			mPutils.del_product(product_infoMap.get("prodid"));
 			response.sendRedirect(request.getContextPath()+"/Resource/pages/ProductManager.jsp?id=1");
+		} else if (product_infoMap.get("flag").equals("notice")) {
+			mPutils.update_notice(product_infoMap.get("message"));
+			response.sendRedirect(request.getContextPath()+"/Resource/pages/ProductManager.jsp?id=1");
 		}
 	}
 
@@ -103,6 +106,10 @@ public class PMServlet extends HttpServlet {
 				System.out.println(e.getLocalizedMessage());
 			}
 		} else {
+			if(request.getParameter("notice")!=null) {
+				productinfoMap.put("flag", "notice");
+				productinfoMap.put("message",request.getParameter("notice"));
+			}else {
 			if (request.getParameter("flag").equals("add")) {
 				productinfoMap.put("flag", request.getParameter("flag"));
 				productinfoMap.put("prodname", request.getParameter("prodname"));
@@ -122,6 +129,7 @@ public class PMServlet extends HttpServlet {
 				productinfoMap.put("prodid", request.getParameter("prodid"));
 
 			}
+		}
 		}
 		return productinfoMap;
 	}

@@ -13,6 +13,7 @@
 <title>会员中心</title>
 <link href="../css/page.css" rel="stylesheet" type="text/css" />
 <link href="../css/reg.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="../css/footer.css">
 <style type="text/css">
 * {
 	box-sizing: border-box;
@@ -78,7 +79,7 @@ body {
 
 	<%
 		String ID = request.getParameter("id");
-		memberUtils memberUtils = new memberUtils();
+		memberUtils memberUtils=new memberUtils();
 		String loginid = null;
 		try {
 			loginid = session.getAttribute("LOGINED").toString();
@@ -264,5 +265,6 @@ body {
 		}
 		}
 	%>
+	<%@include file="footer2.jsp" %>
 </body>
 </html>
