@@ -27,7 +27,7 @@ public class regmember extends HttpServlet {
 		String phoneString = request.getParameter("phone");
 		String emString = request.getParameter("email");
 		String passwdString = JDBCUtil.md5(request.getParameter("password"));
-		String sql = "INSERT INTO Web_Customer (loginid, password, custname, gender, tel, address, integral, email) VALUES(?,?, ?, '', ?, '', 0, ?);";
+		String sql = "INSERT INTO Web_Customer (loginid, password, custname, gender, tel, address, integral, email,type) VALUES(?,?, ?, '', ?, '', 0, ?,'user');";
 		Connection connection = JDBCUtil.getConnection();
 		java.sql.PreparedStatement preparedStatement = null;
 		try {
