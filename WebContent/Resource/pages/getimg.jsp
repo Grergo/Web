@@ -1,10 +1,14 @@
+<%--
+	Created by Eclipse.
+  	@author geroge
+ --%>
 <%@page import="java.io.File"%>
 <%@page import="java.io.OutputStream"%>
 <%@page import="java.io.InputStream"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
-<%@page import="SQL.JDBCUtil"%>
+<%@page import="pers.wwk.Web.SQL.JDBCUtil"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

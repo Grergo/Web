@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Shopping</title>
 </head>
 <body>
-
+	<% 
+		response.sendRedirect(request.getContextPath() + "/Resource/pages/cosmetics.jsp");
+	%>
 </body>
 </html>

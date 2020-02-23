@@ -1,5 +1,9 @@
-package SQL;
-
+package pers.wwk.Web.Servlet;
+/**
+ * 
+ * @author geroge
+ *
+ */
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,19 +17,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
+import pers.wwk.Web.SQL.JDBCUtil;
 
 /**
  * Servlet implementation class Login
+ *  用户登录模块，设置cookie与session
  */
 @WebServlet("/Login")
-public class Login extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public Login() {
+	public LoginServlet() {
 		super();
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		JDBCUtil jdbcUtil = new JDBCUtil();
@@ -44,7 +50,7 @@ public class Login extends HttpServlet {
 				ResultSet resultSet = preparedStatement.executeQuery();
 				resultSet.next();
 				String idString = resultSet.getString("loginid");
-				String type=resultSet.getString("type");
+				String type = resultSet.getString("type");
 				jdbcUtil.close(connection, preparedStatement, resultSet);
 				setLoginCookie(response, idString);
 				setLoginSession(request, idString);
@@ -78,7 +84,7 @@ public class Login extends HttpServlet {
 				ResultSet resultSet = preparedStatement.executeQuery();
 				resultSet.next();
 				String idString = resultSet.getString("loginid");
-				String type=resultSet.getString("type");
+				String type = resultSet.getString("type");
 				jdbcUtil.close(connection, preparedStatement, resultSet);
 				setLoginCookie(response, idString);
 				setLoginSession(request, idString);

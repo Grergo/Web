@@ -1,6 +1,9 @@
-package SQL;
-
-import java.awt.List;
+package pers.wwk.Web.Servlet;
+/**
+ * 
+ * @author geroge
+ *
+ */
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -14,23 +17,24 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.tools.Tool;
-
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import pers.wwk.web.Service.MPutils;
+
 /**
  * Servlet implementation class PMServlet
+ * 商品管理模块，用于提交相应数据
  */
 @WebServlet("/PMServlet")
-public class PMServlet extends HttpServlet {
+public class ProductManagerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public PMServlet() {
+	public ProductManagerServlet() {
 		super();
 	}
 
@@ -38,6 +42,7 @@ public class PMServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Map<String, String> product_infoMap = analysis_Post(request);

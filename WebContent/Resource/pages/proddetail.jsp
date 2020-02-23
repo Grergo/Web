@@ -1,7 +1,11 @@
-<%@page import="SQL.ShowUtils"%>
+<%--
+	Created by Eclipse.
+  	@author geroge
+ --%>
+<%@page import="pers.wwk.web.Service.ShowUtils"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="SQL.memberUtils"%>
+<%@page import="pers.wwk.web.Service.memberUtils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>

@@ -1,6 +1,10 @@
-<%@page import="java.util.HashMap"%>
-<%@page import="SQL.MPutils"%>
-<%@page import="SQL.memberUtils"%>
+<%--
+	Created by Eclipse.
+  	@author geroge
+ --%>
+ <%@page import="java.util.HashMap"%>
+<%@page import="pers.wwk.web.Service.MPutils"%>
+<%@page import="pers.wwk.web.Service.memberUtils"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

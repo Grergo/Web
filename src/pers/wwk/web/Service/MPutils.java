@@ -1,4 +1,4 @@
-package SQL;
+package pers.wwk.web.Service;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,8 +14,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
-
+import pers.wwk.Web.SQL.JDBCUtil;
+/**
+ * 
+ * @author geroge
+ *
+ */
 
 public class MPutils {
 	/**
@@ -23,6 +27,10 @@ public class MPutils {
 	 * 2.修改产品
 	 * 3.添加产品
 	 * 4.删除产品
+	 * 5.更新网站公告
+	 * 6.添加订单信息
+	 * 7.添加订单详细信息
+	 * 
 	 */
 	
 	protected String sql_getProduct="SELECT prodid, prodname, putawaytime, isspecial, isfashion, prodprice, prodimg, prodtype FROM Web_Product;";

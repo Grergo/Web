@@ -1,7 +1,11 @@
-<%@page import="SQL.ShowUtils"%>
+<%--
+	Created by Eclipse.
+  	@author geroge
+ --%>
+<%@page import="pers.wwk.web.Service.ShowUtils"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="SQL.memberUtils"%>
+<%@page import="pers.wwk.web.Service.memberUtils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -30,8 +34,8 @@
 				</div>
 				<%
 					memberUtils memberUtils = new memberUtils();
-					ArrayList<Map<String, String>> notice_List = memberUtils.Select_notice();
-					for (Map<String, String> tem : notice_List) {
+									ArrayList<Map<String, String>> notice_List = memberUtils.Select_notice();
+									for (Map<String, String> tem : notice_List) {
 				%>
 				<div class="content">
 					<p>
@@ -47,12 +51,12 @@
 				<h3 id="product_title">新品上市</h3>
 				<hr>
 				<div class="product_news">
-				<% 
+				<%
 					ShowUtils showUtils=new ShowUtils();
-					ArrayList<Map<String,String>> news=showUtils.Select_news("手袋&包包");
-					if(news.size()!=0){
-					for(Map<String,String>tem:news){
-						%>
+									ArrayList<Map<String,String>> news=showUtils.Select_news("手袋&包包");
+									if(news.size()!=0){
+									for(Map<String,String>tem:news){
+				%>
 					
 						<div class="product">
 						<div id="prodimgbox">

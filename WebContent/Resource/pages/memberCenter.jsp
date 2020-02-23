@@ -1,7 +1,10 @@
-
+<%--
+	Created by Eclipse.
+  	@author geroge
+ --%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="javax.websocket.SessionException"%>
-<%@page import="SQL.memberUtils"%>
+<%@page import="pers.wwk.web.Service.memberUtils"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

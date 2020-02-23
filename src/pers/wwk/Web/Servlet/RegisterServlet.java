@@ -1,5 +1,9 @@
-package SQL;
-
+package pers.wwk.Web.Servlet;
+/**
+ * 
+ * @author geroge
+ *
+ */
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -11,11 +15,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import pers.wwk.Web.SQL.JDBCUtil;
+/**
+ * 
+ * 用户注册模块
+ *
+ */
 @WebServlet("/regmember")
-public class regmember extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public regmember() {
+	public RegisterServlet() {
 		super();
 	}
 
@@ -26,9 +36,9 @@ public class regmember extends HttpServlet {
 		String usernameString = request.getParameter("username");
 		String phoneString = request.getParameter("phone");
 		String emString = request.getParameter("email");
-		String passwdString = JDBCUtil.md5(request.getParameter("password"));
-		String sql = "INSERT INTO Web_Customer (loginid, password, custname, gender, tel, address, integral, email) VALUES(?,?, ?, '', ?, '', 0, ?);";
-		Connection connection = JDBCUtil.getConnection();
+		String passwdString = jdbcUtil.md5(request.getParameter("password"));
+		String sql = "INSERT INTO Web_Customer (loginid, password, custname, gender, tel, address, integral, email,type) VALUES(?,?, ?, '', ?, '', 0, ?,'user');";
+		Connection connection =jdbcUtil.getConnection();
 		java.sql.PreparedStatement preparedStatement = null;
 		try {
 			preparedStatement = connection.prepareStatement(sql);
@@ -42,8 +52,8 @@ public class regmember extends HttpServlet {
 			preparedStatement.setString(4, phoneString);
 			preparedStatement.setString(5, emString);
 			preparedStatement.executeUpdate();
-			JDBCUtil.close(preparedStatement);
-			JDBCUtil.close(connection);
+			jdbcUtil.close(preparedStatement);
+			jdbcUtil.close(connection);
 			response.sendRedirect(request.getContextPath() + "/Resource/pages/Regsuccess.jsp");
 			HttpSession session = request.getSession();
 			session.setAttribute("LOGINED", emString);

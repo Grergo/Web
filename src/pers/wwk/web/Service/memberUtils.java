@@ -1,5 +1,9 @@
-package SQL;
-
+package pers.wwk.web.Service;
+/**
+ * 
+ * @author geroge
+ *
+ */
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +12,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import pers.wwk.Web.SQL.JDBCUtil;
+/**
+ * 
+ * 用户信息管理模块。
+ * 主要功能：
+ * 	1.查询用户信息
+ * 	2.更新用户信息
+ * 	3.获取订单信息
+ * 	4.获取默认地址
+ * 	5.密码更新
+ * 	6.获取网站公告
+ *
+ */
 public class memberUtils {
 	protected String sql_person_Select="SELECT  loginid, custname, gender, tel, integral, email FROM Web_Customer where email=?";
 	protected String sql_Person_update="UPDATE Web_Customer SET gender=?,tel=?,custname=? WHERE loginid=?;";
@@ -21,7 +38,7 @@ public class memberUtils {
 	}
 	public Map<String, String> Select_Person_info(String loginid) {
 		JDBCUtil jdbcUtil=new JDBCUtil();
-		Connection connection=JDBCUtil.getConnection();
+		Connection connection=jdbcUtil.getConnection();
 		ResultSet resultSet=null;
 		Map<String, String> personinfo= new HashMap<String, String>();
 		try {
@@ -35,7 +52,7 @@ public class memberUtils {
 			personinfo.put("tel", resultSet.getString("tel"));
 			personinfo.put("integral", resultSet.getString("integral"));
 			personinfo.put("email", resultSet.getString("email"));
-			JDBCUtil.close(connection, preparedStatement, resultSet);
+			jdbcUtil.close(connection, preparedStatement, resultSet);
 		} catch (SQLException e) {
 			
 			System.out.println(e.getLocalizedMessage());
@@ -44,7 +61,7 @@ public class memberUtils {
 	}
 	public  void update_person_info(String gender,String tel,String custname,String loginid) {
 		JDBCUtil jdbcUtil=new JDBCUtil();
-		Connection connection=JDBCUtil.getConnection();
+		Connection connection=jdbcUtil.getConnection();
 		PreparedStatement preparedStatement=null;
 		try {
 			preparedStatement=connection.prepareStatement(sql_Person_update);
@@ -58,11 +75,11 @@ public class memberUtils {
 			
 			System.out.println(e.getLocalizedMessage());
 		}
-		JDBCUtil.close(connection, preparedStatement, null);
+		jdbcUtil.close(connection, preparedStatement, null);
 	}
 	public void update_address(String address,String loginid) {
 		JDBCUtil jdbcUtil=new JDBCUtil();
-		Connection connection=JDBCUtil.getConnection();
+		Connection connection=jdbcUtil.getConnection();
 		PreparedStatement preparedStatement=null;
 		try {
 			preparedStatement=connection.prepareStatement(sql_address_update);
@@ -74,11 +91,11 @@ public class memberUtils {
 			
 			System.out.println(e.getLocalizedMessage());
 		}
-		JDBCUtil.close(connection, preparedStatement, null);
+		jdbcUtil.close(connection, preparedStatement, null);
 	}
 	public ArrayList<Map<String, String>> Select_order_info(String loginid) {
 		JDBCUtil jdbcUtil=new JDBCUtil();
-		Connection connection=JDBCUtil.getConnection();
+		Connection connection=jdbcUtil.getConnection();
 		ArrayList<Map<String, String>> order_list= new ArrayList<Map<String,String>>();
 		PreparedStatement preparedStatement=null;
 		try {
@@ -98,7 +115,7 @@ public class memberUtils {
 				map_teMap.put("status", resultSet.getString("status"));
 				order_list.add(map_teMap);
 			}
-			JDBCUtil.close(connection, preparedStatement, resultSet);
+			jdbcUtil.close(connection, preparedStatement, resultSet);
 		} catch (Exception e) {
 			System.out.println(e.getLocalizedMessage());
 		}
@@ -106,7 +123,7 @@ public class memberUtils {
 	}
 	public ArrayList<Map<String, String>> Select_notice() {
 		JDBCUtil jdbcUtil=new JDBCUtil();
-		Connection connection= JDBCUtil.getConnection();
+		Connection connection= jdbcUtil.getConnection();
 		ArrayList<Map<String, String>> message_list= new ArrayList<Map<String,String>>();
 		PreparedStatement preparedStatement=null;
 		try {
@@ -118,7 +135,7 @@ public class memberUtils {
 				message.put("message",resultSet.getString("message"));
 				message_list.add(message);
 			}
-			JDBCUtil.close(connection, preparedStatement, resultSet);
+			jdbcUtil.close(connection, preparedStatement, resultSet);
 		} catch (Exception e) {
 			System.out.println(e.getLocalizedMessage());
 		}
@@ -126,7 +143,7 @@ public class memberUtils {
 	}
 public  Map<String, String> Select_address(String loginid) {
 	JDBCUtil jdbcUtil=new JDBCUtil();
-	Connection connection=JDBCUtil.getConnection();
+	Connection connection=jdbcUtil.getConnection();
 	ResultSet resultSet=null;
 	Map<String, String> address= new HashMap<String, String>();
 	try {
@@ -135,7 +152,7 @@ public  Map<String, String> Select_address(String loginid) {
 		resultSet=preparedStatement.executeQuery();
 		resultSet.next();
 		address.put("address", resultSet.getString("address"));
-		JDBCUtil.close(connection, preparedStatement, resultSet);
+		jdbcUtil.close(connection, preparedStatement, resultSet);
 	} catch (Exception e) {
 		System.out.println(e.getLocalizedMessage());
 	}
@@ -143,15 +160,15 @@ public  Map<String, String> Select_address(String loginid) {
 }
 public void update_password(String password,String loginid) {
 	JDBCUtil jdbcUtil=new JDBCUtil();
-	Connection connection=JDBCUtil.getConnection();
+	Connection connection=jdbcUtil.getConnection();
 	PreparedStatement preparedStatement=null;
 	try {
 		preparedStatement=connection.prepareStatement(sql_password_update);
-		preparedStatement.setString(1, JDBCUtil.md5(password));
+		preparedStatement.setString(1, jdbcUtil.md5(password));
 		preparedStatement.executeUpdate();
 	} catch (Exception e) {
 		System.out.println(e.getLocalizedMessage());
 	}
-	JDBCUtil.close(connection, preparedStatement, null);
+	jdbcUtil.close(connection, preparedStatement, null);
 }
 }

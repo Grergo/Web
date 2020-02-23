@@ -1,5 +1,9 @@
-package SQL;
-
+package pers.wwk.Web.Servlet;
+/**
+ * 
+ * @author geroge
+ *
+ */
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,17 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import pers.wwk.web.Service.memberUtils;
+
 /**
  * Servlet implementation class Member_DO
+ * 用户管理模块，用于执行用户信息的更新
  */
 @WebServlet("/Member_DO")
-public class Member_DO extends HttpServlet {
+public class MermberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Member_DO() {
+	public MermberServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 

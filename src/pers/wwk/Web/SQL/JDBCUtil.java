@@ -1,5 +1,9 @@
-package SQL;
-
+package pers.wwk.Web.SQL;
+/**
+ * 
+ * @author geroge
+ *
+ */
 import java.io.InputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
@@ -9,7 +13,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
-
+/**
+ * 
+ * 数据库读写模块以及数据MD5加密模块
+ * 
+ */
 public class JDBCUtil {
 	private static String driverString;
 	private static String urlString;
@@ -29,7 +37,7 @@ public class JDBCUtil {
 			e.printStackTrace();
 		}
 	}
-	public static java.sql.Connection getConnection() {
+	public  java.sql.Connection getConnection() {
 		try {
 			return DriverManager.getConnection(urlString,usernameString,passwdString);
 		} catch (SQLException e) {
@@ -37,7 +45,7 @@ public class JDBCUtil {
 			return null;
 		}
 	}
-	public static void close(java.sql.Connection connection,Statement statement,ResultSet resultSet) {
+	public  void close(java.sql.Connection connection,Statement statement,ResultSet resultSet) {
 		if(resultSet != null) {
 			try {
 				resultSet.close();
@@ -61,7 +69,7 @@ public class JDBCUtil {
 		}
 	}
 	
-	public static void close(java.sql.Connection connection) {
+	public  void close(java.sql.Connection connection) {
 		if (connection!=null) {
 			try {
 				connection.close();
@@ -71,7 +79,7 @@ public class JDBCUtil {
 			}
 		}
 	}
-	public static void close(Statement statement) {
+	public  void close(Statement statement) {
 		if (statement!=null) {
 			try {
 				statement.close();
@@ -81,7 +89,7 @@ public class JDBCUtil {
 			}
 		}
 	}
-	public static void close(ResultSet resultSet) {
+	public  void close(ResultSet resultSet) {
 		if (resultSet!=null) {
 			try {
 				resultSet.close();
@@ -91,7 +99,7 @@ public class JDBCUtil {
 			}
 		}
 	}
-	public static String md5(String plainText) {
+	public  String md5(String plainText) {
 		byte[] secretBytes = null;
 		try {
 			//先通过MessageDigest把目标内容转换为字节数组

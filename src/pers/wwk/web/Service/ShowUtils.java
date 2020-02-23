@@ -1,5 +1,9 @@
-package SQL;
-
+package pers.wwk.web.Service;
+/**
+ * 
+ * @author geroge
+ *
+ */
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +12,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import pers.wwk.Web.SQL.JDBCUtil;
+/**
+ * 
+ * 1. 查询新品-> 可指定商品类型
+ * 2. 查询指定类型商品-> 可指定商品类型，是否特价
+ * 3. 查询时尚产品
+ * 4. 获取商品详细信息
+ *
+ */
 public class ShowUtils {
 	public ArrayList<Map<String, String>> Select_news(String type) {
 		ArrayList<Map<String, String>> tem_ArrayList = new ArrayList<Map<String, String>>();
