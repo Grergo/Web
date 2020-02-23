@@ -33,8 +33,8 @@ public class Login extends HttpServlet {
 		String userString = request.getParameter("username");
 		String passwdString = jdbcUtil.md5(request.getParameter("password"));
 		Connection connection = jdbcUtil.getConnection();
-		String sql_email = "select loginid from Web_Customer where email=? and password=?;";
-		String sql_phone = "select loginid from Web_Customer where tel=? and password=?;";
+		String sql_email = "select loginid,type from Web_Customer where email=? and password=?;";
+		String sql_phone = "select loginid,type from Web_Customer where tel=? and password=?;";
 		PreparedStatement preparedStatement = null;
 		if (userString.contains("@")) {
 			try {
@@ -44,10 +44,11 @@ public class Login extends HttpServlet {
 				ResultSet resultSet = preparedStatement.executeQuery();
 				resultSet.next();
 				String idString = resultSet.getString("loginid");
+				String type=resultSet.getString("type");
 				jdbcUtil.close(connection, preparedStatement, resultSet);
 				setLoginCookie(response, idString);
 				setLoginSession(request, idString);
-				if (userString.equals("weiwang730@gmail.com")) {
+				if (type.equals("admin")) {
 					if (session.getAttribute("Reference") == null) {
 						response.sendRedirect(request.getContextPath() + "/Resource/pages/ProductManager.jsp?id=1");
 					} else {
@@ -55,7 +56,6 @@ public class Login extends HttpServlet {
 								request.getContextPath() + "/Resource/pages/" + session.getAttribute("Reference"));
 					}
 				} else {
-					System.out.println(session.getAttribute("Reference"));
 					if (session.getAttribute("Reference") == null) {
 						response.sendRedirect(request.getContextPath() + "/Resource/pages/memberCenter.jsp?id=1");
 					} else {
@@ -78,10 +78,11 @@ public class Login extends HttpServlet {
 				ResultSet resultSet = preparedStatement.executeQuery();
 				resultSet.next();
 				String idString = resultSet.getString("loginid");
+				String type=resultSet.getString("type");
 				jdbcUtil.close(connection, preparedStatement, resultSet);
 				setLoginCookie(response, idString);
 				setLoginSession(request, idString);
-				if (userString.equals("123465987")) {
+				if (type.equals("admin")) {
 					if (session.getAttribute("Reference") == null) {
 						response.sendRedirect(request.getContextPath() + "/Resource/pages/ProductManager.jsp?id=1");
 					} else {
