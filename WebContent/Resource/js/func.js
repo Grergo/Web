@@ -29,3 +29,35 @@ function UploadImg(obj) {
         var img = document.getElementById("selectImg");
         img.src = e.target.result;
     }}
+function changeclass(id){
+	if(id==2){
+	$('#'+(id-1).toString()).removeClass('selected');
+	$('#'+id.toString()).addClass('selected');
+	}else if(id==3){
+		$('#'+(id-1).toString()).removeClass('selected');
+		$('#'+(id-2).toString()).removeClass('selected');
+		$('#'+id.toString()).addClass('selected');
+	}
+}
+function del_product(ev){
+	var M_tr=$(ev).parent().parent();
+	M_tr.remove();
+	change_total()
+}
+function figure(ev){
+	var M_tr=$(ev).parent().parent();
+	M_tr.find("[id='totalprice']").html('￥'+String(parseInt($(ev).val())*parseFloat(M_tr.find("[name='price']").val())));
+	change_total()
+}
+function change_total(){
+		var Price=0.0;
+		var count=0;
+	$('tr').find("#totalprice").each(function(){
+		Price+=parseFloat($(this).html().replace('￥',''));
+	})
+	$('tr').find('#prodcount').each(function(){
+		count+=parseInt($(this).val());
+	})
+	$('#totalcount').html(count);
+	$('#totalprices').html(Price)
+}

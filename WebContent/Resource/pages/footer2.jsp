@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-</head>
-<body>
+
 <div class="footer_resize_2">
     <div class="footer">
       <ul>
@@ -18,6 +14,4 @@
       <p>© Copyright © 2020.Company name All rights reserved.</p>
       <div class="clr"></div>
     </div>
-  </div>
-</body>
-</html>
+ </div>

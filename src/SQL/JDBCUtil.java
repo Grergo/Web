@@ -5,14 +5,10 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
-
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Driver;
 
 public class JDBCUtil {
 	private static String driverString;

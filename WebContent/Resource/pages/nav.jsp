@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
+
 <style>
 	*{padding:0;list-style-type:none;}
 	
@@ -83,8 +81,6 @@
   text-decoration: none;
  }
 </style>
-</head>
-<body>
 <ul class="nav blue">
       <li><a href="cosmetics.jsp">化妆品</a></li>
       <li><a href="Bags.jsp">手袋&包包</a></li>
@@ -94,5 +90,3 @@
       <li><a href="e-magazine.jsp">电子杂志</a></li>
       <li><a href="#">最新活动</a></li>
 </ul>
-</body>
-</html>

@@ -24,7 +24,7 @@ hr {
 }
 
 .subbox img {
-	border: 15px solid #F8EFBA;
+	border: 15px solid #dfe6e9;
 }
 
 .poptip {
@@ -192,7 +192,7 @@ hr {
     padding-bottom: 8px;
     padding-top: 5px;
     text-align: center;
-    background-color: #ffda79;
+    background-color: #74b9ff;
     border-radius: 10px;
     /* margin-left: auto; */
     margin-right: 120px;
@@ -202,7 +202,7 @@ hr {
 }
 .top_bar a{
 	text-decoration: none;
-	color: #34495e;
+	color: #636e72;
 	font-weight:700;
 }
 .logo{
@@ -280,7 +280,7 @@ hr {
  width:100px;
  font-size: 12px;
  line-height:15px;
-
+ text-align:center;
 }
 #prodform input[type="submit"] {
  background: #E27575;
@@ -296,5 +296,187 @@ hr {
  background: #CF7A7A
  }
 
+.process ul{
+	list-style-type:none;
+margin:0;
+padding:0;
+padding-top:6px;
+padding-bottom:6px;
+}
+.process ul>li
+{
+    background: #b2bec3;
+    width: 120px;
+    display: inline-block;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    font-weight: 700;
+    margin-left: -5px;
+    border: 1px solid #dfe6e9;
+}
+.selected{
+	background: #ff6b81 !important;
+	color:#ffffff;
+}
+.process{
+	position: relative;
+    margin: 0 auto;
+    width: 950px;
+    margin-top: 20px;
+}
+.shopping_prod_form{
+    width: 950px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
 
+}
+.prod_info {
+	margin-left: auto;
+	margin-right: auto;
+	border-collapse: collapse;
+	font-family: Futura, Arial, sans-serif;
+	width: 98%;
+	word-break: break-all;
+	word-wrap: break-all;
+}
 
+.prod_info {
+	background: #8e98a1;
+	color: #222f3e;
+}
+
+.prod_info th {
+	padding: .65em;
+	border: 1px solid #576574;
+	TEXT-ALIGN: center;
+}
+.prod_info td{
+	padding: .65em;
+	border: 1px solid #576574;
+	TEXT-ALIGN: center;
+	background:#dfe6e9;
+}
+.prod_info td>input{
+	width: 60px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    	border: 1px solid #DADADA;
+	color: #888;
+    
+}
+.shopping_prod_form input[type="submit"] {
+ background: #E27575;
+ border: none;
+ padding: 10px 25px 10px 25px;
+    color: #FFF;
+ box-shadow: 1px 1px 5px #B6B6B6;
+ border-radius: 3px;
+ text-shadow: 1px 1px 1px #9E3F3F;
+ cursor: pointer;
+ margin-left:80%;
+ margin-top:20px;
+ }
+.shopping_prod_form input[type="submit"]:hover {
+ background: #CF7A7A
+ }
+ .order_address{
+ 	margin-left: auto;
+	margin-right: auto;
+	width: 700px;
+	background: #F7F7F7;
+	padding: 25px 15px 25px 10px;
+	font: 16px Georgia, "Times New Roman", Times, serif;
+	color: #576574;
+	text-shadow: 0px 1px 1px #FFF;
+	border: 1px solid #E4E4E4;
+	position: relative;
+	top: 60px;
+	min-height: 240px;
+	box-shadow: 5px 5px 10px #888888;
+	border-radius: 10px;
+ }
+ .order_address_form  h1 {
+    font-size: 25px;
+    padding: 0px 0px 10px 40px;
+    display: block;
+    border-bottom:1px solid #E4E4E4;
+    margin: -10px -15px 30px -10px;;
+    color: #888;
+}
+.order_address_form h1>span {
+display: block;
+font-size: 11px;
+}
+.order_address_form label {
+	display: block;
+	margin: 0px;
+}
+.order_address_form label>span {
+float: left;
+width: 20%;
+text-align: right;
+padding-right: 10px;
+ margin-top: 10px;
+color: #888;
+}
+.order_address_form input[type="text"],.order_address_form input[type="phone"] {
+border: 1px solid #DADADA;
+color: #888;
+height: 30px;
+ margin-bottom: 16px;
+ margin-right: 6px;
+ margin-top: 2px;
+ outline: 0 none;
+ padding: 3px 3px 3px 5px;
+ width: 70%;
+ font-size: 12px;
+ line-height:15px;
+ box-shadow: inset 0px 1px 4px #ECECEC;
+ -moz-box-shadow: inset 0px 1px 4px #ECECEC;
+ -webkit-box-shadow: inset 0px 1px 4px #ECECEC;
+}
+.order_address_form input[type="submit"] {
+ background: #E27575;
+ border: none;
+ padding: 10px 25px 10px 25px;
+    color: #FFF;
+ box-shadow: 1px 1px 5px #B6B6B6;
+ border-radius: 3px;
+ text-shadow: 1px 1px 1px #9E3F3F;
+ cursor: pointer;
+ margin-left:70%;
+ margin-top:20px;
+ }
+.order_address_form input[type="submit"]:hover {
+ background: #CF7A7A
+ }
+ .success{
+    margin-left:auto;
+    margin-right:auto;
+    max-width: 500px;
+    background: #F7F7F7;
+    padding: 25px 15px 25px 10px;
+    font: 12px Georgia, "Times New Roman", Times, serif;
+    color: #888;
+    text-shadow: 1px 1px 1px #FFF;
+    border:1px solid #E4E4E4;
+    position: relative;
+    top:120px;
+    box-shadow: 5px 5px 10px #888888;
+    border-radius: 10px;
+}
+.success h1 {
+    font-size: 25px;
+    padding: 0px 0px 10px 40px;
+    display: block;
+    border-bottom:1px solid #E4E4E4;
+    margin: -10px -15px 30px -10px;;
+    color: #888;
+}
+.success h1>span {
+display: block;
+font-size: 11px;
+}

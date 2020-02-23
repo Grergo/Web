@@ -33,7 +33,8 @@
 			<% 
 				String prodid=request.getParameter("id");
 				ShowUtils showUtils=new ShowUtils();
-				Map<String,String> prodmap=showUtils.get_Product_info(prodid);	
+				Map<String,String> prodmap=showUtils.get_Product_info(prodid);
+				session.setAttribute("Reference", "proddetail.jsp?id="+prodid);
 			%>
 	<div class="Main">
 	<img src="../images/logo.png" class="logo">
@@ -77,7 +78,8 @@
 				<span id="prodpri">¥<%=prodmap.get("prodprice") %></span>
 				<span id="pj">用户评价: <p id="grade">★★★★★</p></span>
 				<hr>
-				<label>数量:<input type="number" name="count" id="count" required></label>
+				<label>数量:<input type="number" name="count" id="count" required value="1"  min="0" 
+ max="99"></label>
 				<input name="prodname" value="<%=prodmap.get("prodname") %>" hidden>
 				<input name="prodid" value="<%=prodid %>" hidden>
 				<input name="prodprice" value="<%=prodmap.get("prodprice") %>" hidden>

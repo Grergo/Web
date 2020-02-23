@@ -30,6 +30,8 @@ public class MPutils {
 	protected String sql_insertProduct="INSERT INTO Web_Product (prodid, prodname, putawaytime, isspecial, isfashion, prodprice, prodimg, prodtype) VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
 	protected String sql_delProduct="DELETE FROM Web_Product WHERE prodid=?;";
 	protected String sql_update_notice="INSERT INTO Web_Notic (message) values(?);";
+	protected String sql_insert_orderinfo="INSERT INTO Web_Orderinfo (orderno,ordertime, customer, consignee, orderprice, orderaddress, zipcode, phone, status, customerid) VALUES(?,CURRENT_TIMESTAMP, ?, ?, ?, ?, ?, ?, '订单已处理', ?);"; 
+	protected String sql_insert_orderdetail="INSERT INTO Web_orderdetial (orderno, prodid, count, price) VALUES(?, ?, ?, ?);";
 	public ArrayList<Map<String, String>> getProduct() {
 		// 查询所有产品信息,存到list中,返回list,出现异常返回null
 		JDBCUtil jdbcUtil=new JDBCUtil();
@@ -63,6 +65,7 @@ public class MPutils {
 		java.util.Date date=new java.util.Date();
 		java.sql.Date sql_date= new java.sql.Date(date.getTime());
 		String prodid=UUID.randomUUID().toString().replaceAll("-", "");
+
 		InputStream imgStream = null;
 		try {
 			imgStream = new FileInputStream(prodimg);
@@ -127,6 +130,44 @@ public class MPutils {
 		try {
 			preparedStatement=connection.prepareStatement(sql_update_notice);
 			preparedStatement.setString(1, notice);
+			preparedStatement.executeUpdate();
+			jdbcUtil.close(connection, preparedStatement, null);
+		} catch (Exception e) {
+			System.out.println(e.getLocalizedMessage());
+		}
+	}
+	public String update_order_info(String customer,String cosignee,double orderprice,String order_address,String zipcode,String phone,String loginid ) {
+		JDBCUtil jdbcUtil=new JDBCUtil();
+		Connection connection=jdbcUtil.getConnection();
+		String ordernoString=UUID.randomUUID().toString().replace("-","");
+		PreparedStatement preparedStatement=null;
+		try {
+			preparedStatement=connection.prepareStatement(sql_insert_orderinfo);
+			preparedStatement.setString(1, ordernoString);
+			preparedStatement.setString(2, customer);
+			preparedStatement.setString(3, cosignee);
+			preparedStatement.setDouble(4, orderprice);
+			preparedStatement.setString(5, order_address);
+			preparedStatement.setString(6, zipcode);
+			preparedStatement.setString(7, phone);
+			preparedStatement.setString(8, loginid);
+			preparedStatement.executeUpdate();
+			jdbcUtil.close(connection, preparedStatement, null);
+		} catch (Exception e) {
+			System.out.println(e.getLocalizedMessage());
+		}
+		return ordernoString;
+	}
+	public void update_order_detail(String orderno,String prodid,String count,String price) {
+		JDBCUtil jdbcUtil=new JDBCUtil();
+		Connection connection=jdbcUtil.getConnection();
+		PreparedStatement preparedStatement=null;
+		try {
+			preparedStatement=connection.prepareStatement(sql_insert_orderdetail);
+			preparedStatement.setString(1, orderno);
+			preparedStatement.setString(2, prodid);
+			preparedStatement.setInt(3, Integer.parseInt(count));
+			preparedStatement.setDouble(4,Double.parseDouble(price));
 			preparedStatement.executeUpdate();
 			jdbcUtil.close(connection, preparedStatement, null);
 		} catch (Exception e) {

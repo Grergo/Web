@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 /**
  * Servlet implementation class Login
@@ -21,69 +22,96 @@ import javax.servlet.http.HttpSession;
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public Login() {
-        super();
-    }
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		JDBCUtil jdbcUtil=new JDBCUtil();
-		String userString=request.getParameter("username");
-		String passwdString=jdbcUtil.md5(request.getParameter("password"));
-		Connection connection= jdbcUtil.getConnection();
-		String sql_email="select loginid from Web_Customer where email=? and password=?;";
-		String sql_phone="select loginid from Web_Customer where tel=? and password=?;";
-		PreparedStatement preparedStatement=null;
-		if(userString.contains("@")) {
+	public Login() {
+		super();
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		JDBCUtil jdbcUtil = new JDBCUtil();
+		HttpSession session = request.getSession();
+		String userString = request.getParameter("username");
+		String passwdString = jdbcUtil.md5(request.getParameter("password"));
+		Connection connection = jdbcUtil.getConnection();
+		String sql_email = "select loginid from Web_Customer where email=? and password=?;";
+		String sql_phone = "select loginid from Web_Customer where tel=? and password=?;";
+		PreparedStatement preparedStatement = null;
+		if (userString.contains("@")) {
 			try {
-				preparedStatement=connection.prepareStatement(sql_email);
+				preparedStatement = connection.prepareStatement(sql_email);
 				preparedStatement.setString(1, userString);
 				preparedStatement.setString(2, passwdString);
-				ResultSet resultSet=preparedStatement.executeQuery();
+				ResultSet resultSet = preparedStatement.executeQuery();
 				resultSet.next();
-				String idString=resultSet.getString("loginid");
+				String idString = resultSet.getString("loginid");
 				jdbcUtil.close(connection, preparedStatement, resultSet);
 				setLoginCookie(response, idString);
 				setLoginSession(request, idString);
-				if(userString.equals("weiwang730@gmail.com")) {
-					response.sendRedirect(request.getContextPath()+"/Resource/pages/ProductManager.jsp?id=1");
-				}else {
-					response.sendRedirect(request.getContextPath()+"/Resource/pages/memberCenter.jsp?id=1");
+				if (userString.equals("weiwang730@gmail.com")) {
+					if (session.getAttribute("Reference") == null) {
+						response.sendRedirect(request.getContextPath() + "/Resource/pages/ProductManager.jsp?id=1");
+					} else {
+						response.sendRedirect(
+								request.getContextPath() + "/Resource/pages/" + session.getAttribute("Reference"));
+					}
+				} else {
+					System.out.println(session.getAttribute("Reference"));
+					if (session.getAttribute("Reference") == null) {
+						response.sendRedirect(request.getContextPath() + "/Resource/pages/memberCenter.jsp?id=1");
+					} else {
+						response.sendRedirect(
+								request.getContextPath() + "/Resource/pages/" + session.getAttribute("Reference"));
+					}
+
 				}
 			} catch (SQLException e) {
-				if(e.getLocalizedMessage().contains("empty")) {
-					response.sendRedirect(request.getContextPath()+"/Resource/pages/Login.jsp?code=faild");
+				if (e.getLocalizedMessage().contains("empty")) {
+					response.sendRedirect(request.getContextPath() + "/Resource/pages/Login.jsp?code=faild");
 				}
 			}
-			
-		}else{
+
+		} else {
 			try {
-				preparedStatement=connection.prepareStatement(sql_phone);
+				preparedStatement = connection.prepareStatement(sql_phone);
 				preparedStatement.setString(1, userString);
 				preparedStatement.setString(2, passwdString);
-				ResultSet resultSet=preparedStatement.executeQuery();
+				ResultSet resultSet = preparedStatement.executeQuery();
 				resultSet.next();
-				String idString=resultSet.getString("loginid");
+				String idString = resultSet.getString("loginid");
 				jdbcUtil.close(connection, preparedStatement, resultSet);
 				setLoginCookie(response, idString);
 				setLoginSession(request, idString);
-				if(userString.equals("123465987")) {
-					response.sendRedirect(request.getContextPath()+"/Resource/pages/ProductManager.jsp");
-				}else {
-					response.sendRedirect(request.getContextPath()+"/Resource/pages/memberCenter.jsp?id=1");
+				if (userString.equals("123465987")) {
+					if (session.getAttribute("Reference") == null) {
+						response.sendRedirect(request.getContextPath() + "/Resource/pages/ProductManager.jsp?id=1");
+					} else {
+						response.sendRedirect(
+								request.getContextPath() + "/Resource/pages/" + session.getAttribute("Reference"));
+					}
+				} else {
+					if (session.getAttribute("Reference") == null) {
+						response.sendRedirect(request.getContextPath() + "/Resource/pages/memberCenter.jsp?id=1");
+					} else {
+						response.sendRedirect(
+								request.getContextPath() + "/Resource/pages/" + session.getAttribute("Reference"));
+					}
 				}
 			} catch (SQLException e) {
-				if(e.getLocalizedMessage().contains("empty")) {
-					response.sendRedirect(request.getContextPath()+"/Resource/pages/Login.jsp?code=faild");
+				if (e.getLocalizedMessage().contains("empty")) {
+					response.sendRedirect(request.getContextPath() + "/Resource/pages/Login.jsp?code=faild");
 				}
 			}
 		}
 	}
-	protected void setLoginCookie(HttpServletResponse response,String LoingID) {
-		Cookie cookie=new Cookie("LoginID", LoingID);
+
+	protected void setLoginCookie(HttpServletResponse response, String LoingID) {
+		Cookie cookie = new Cookie("LoginID", LoingID);
 		cookie.setMaxAge(1800);
 		response.addCookie(cookie);
 	}
-	protected void setLoginSession(HttpServletRequest request,String LoginID) {
-		HttpSession session=request.getSession();
+
+	protected void setLoginSession(HttpServletRequest request, String LoginID) {
+		HttpSession session = request.getSession();
 		session.setAttribute("LOGINED", LoginID);
 	}
 
